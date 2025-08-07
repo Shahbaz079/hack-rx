@@ -24,20 +24,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    try {
-      const url = new URL(documents);
-      if (!url.searchParams.has('sv') || !url.searchParams.has('sig')) {
-        return NextResponse.json(
-          { error: "Invalid Azure Blob Storage URL. Missing required SAS token parameters." },
-          { status: 400 }
-        );
-      }
-    } catch (error) {
-      return NextResponse.json(
-        { error: "Invalid URL format. Please provide a valid Azure Blob Storage URL." },
-        { status: 400 }
-      );
-    }
+   
 
     let fullText = "";
 
