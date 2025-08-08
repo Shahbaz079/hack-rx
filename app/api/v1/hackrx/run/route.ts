@@ -24,7 +24,21 @@ export async function POST(req: NextRequest) {
       );
     }
 
-   
+   // Validate that documents is a valid URL
+    try {
+      const url = new URL(documents);
+      if (!url.protocol.startsWith('http')) {
+        return NextResponse.json(
+          { error: "Invalid documents parameter. Must be a valid HTTP/HTTPS URL." },
+          { status: 400 }
+        );
+      }
+    } catch (error) {
+      return NextResponse.json(
+        { error: "Invalid documents parameter. Must be a valid URL." },
+        { status: 400 }
+      );
+    }
 
     let fullText = "";
 
